@@ -1,6 +1,3 @@
-# exclude all files and folders
-/*
-
-# include .gitignore и README.MD
-!.gitignore
-!README.MD
+.gradle
+.idea
+build
