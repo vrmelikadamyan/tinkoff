@@ -1,6 +1,8 @@
-package ru.vmelik.tinkoff.weather;
+package ru.vmelik.tinkoff.util;
 
-import java.time.LocalDateTime;
+import ru.vmelik.tinkoff.model.CityWeather;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,13 +15,13 @@ public final class WeatherTestUtil {
     private WeatherTestUtil() {
     }
 
-    public static List<Weather> generateRandomRegionWeatherList(String region, int size) {
+    public static List<CityWeather> generateRandomRegionWeatherList(String region, int size) {
         UUID regionId = UUID.randomUUID();
 
-        List<Weather> weatherList = new ArrayList<>(size);
+        List<CityWeather> weatherList = new ArrayList<>(size);
         for (int i = 0; i < size; ++i) {
             weatherList.add(
-                    new Weather(regionId, region, randomTemperature(), LocalDateTime.now().minusDays(i)));
+                    new CityWeather(regionId, region, randomTemperature(), LocalDate.now().minusDays(i)));
         }
 
         return weatherList;
