@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+weather-api:
+  base-url: http://api.weatherapi.com/v1
+  key: 5bfe650b86b94f2a8cc150657211801
+  endpoints:
+    current: /current.json
+
+resilience4j.ratelimiter:
+  instances:
+    weatherapi:
+      limitForPeriod: 1000000
+      limitRefreshPeriod: 30d
