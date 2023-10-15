@@ -1,12 +1,13 @@
 package ru.vmelik.tinkoff.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.vmelik.tinkoff.dao.CityDao;
 import ru.vmelik.tinkoff.dao.WeatherDao;
 import ru.vmelik.tinkoff.exception.NotFoundException;
 import ru.vmelik.tinkoff.mapper.WeatherMapper;
-import ru.vmelik.tinkoff.model.City;
+import ru.vmelik.tinkoff.model.entity.City;
 import ru.vmelik.tinkoff.model.dto.WeatherRequestDto;
 import ru.vmelik.tinkoff.model.dto.WeatherResponseDto;
 import ru.vmelik.tinkoff.service.WeatherService;
@@ -18,7 +19,9 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class WeatherServiceImpl implements WeatherService {
+    @Qualifier("hibernateWeatherDaoImpl")
     private final WeatherDao weatherDao;
+    @Qualifier("hibernateCityDaoImpl")
     private final CityDao cityDao;
 
     private final WeatherMapper weatherMapper;

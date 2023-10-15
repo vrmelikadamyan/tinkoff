@@ -17,8 +17,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.2.0")
     implementation("io.github.resilience4j:resilience4j-spring-boot3:2.1.0")
+
+    runtimeOnly("com.h2database:h2:2.2.224")
+    implementation("org.liquibase:liquibase-core:4.24.0")
 
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
 
