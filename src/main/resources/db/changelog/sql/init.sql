@@ -19,6 +19,9 @@ CREATE TABLE weather
     city_id     uuid      NOT NULL REFERENCES city (id)
 );
 
+CREATE INDEX IF NOT EXISTS city_i1 ON city (name);
+CREATE INDEX IF NOT EXISTS weather_i1 ON weather (date_time, city_id);
+
 INSERT INTO weather_type(id, name)
 VALUES ('5ce5672a-c90c-4830-8743-5e0fddee2cbd', 'snowy'),
        ('3bee7c70-95a5-439d-acc0-0a8c1cd10d2d', 'rainy'),

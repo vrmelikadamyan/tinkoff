@@ -4,7 +4,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import ru.vmelik.tinkoff.dao.WeatherDao;
 import ru.vmelik.tinkoff.dao.repository.WeatherRepository;
 import ru.vmelik.tinkoff.model.entity.Weather;
@@ -19,7 +18,6 @@ public class HibernateWeatherDaoImpl implements WeatherDao {
     private final WeatherRepository weatherRepository;
 
     @Nonnull
-    @Transactional
     @Override
     public Weather create(@Nonnull Weather entity) {
         return weatherRepository.save(entity);
@@ -32,14 +30,12 @@ public class HibernateWeatherDaoImpl implements WeatherDao {
     }
 
     @Nonnull
-    @Transactional
     @Override
     public Weather update(@Nonnull Weather entity) {
         return weatherRepository.save(entity);
     }
 
     @Nullable
-    @Transactional
     @Override
     public Weather delete(@Nonnull UUID uuid) {
         Optional<Weather> weather = weatherRepository.findById(uuid);
@@ -55,7 +51,6 @@ public class HibernateWeatherDaoImpl implements WeatherDao {
     }
 
     @Override
-    @Transactional
     public void deleteAllByCity(UUID cityId) {
         weatherRepository.deleteAllByCity_Id(cityId);
     }

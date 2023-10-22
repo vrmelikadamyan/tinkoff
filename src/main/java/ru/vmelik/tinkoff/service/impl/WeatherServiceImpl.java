@@ -3,13 +3,15 @@ package ru.vmelik.tinkoff.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vmelik.tinkoff.dao.CityDao;
 import ru.vmelik.tinkoff.dao.WeatherDao;
 import ru.vmelik.tinkoff.exception.NotFoundException;
 import ru.vmelik.tinkoff.mapper.WeatherMapper;
-import ru.vmelik.tinkoff.model.entity.City;
 import ru.vmelik.tinkoff.model.dto.WeatherRequestDto;
 import ru.vmelik.tinkoff.model.dto.WeatherResponseDto;
+import ru.vmelik.tinkoff.model.entity.City;
 import ru.vmelik.tinkoff.service.WeatherService;
 
 import java.time.LocalDate;
@@ -27,6 +29,7 @@ public class WeatherServiceImpl implements WeatherService {
     private final WeatherMapper weatherMapper;
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public UUID addWeatherInfo(UUID cityId, WeatherRequestDto weatherInfo) {
         City city = findCity(cityId);
 
@@ -34,6 +37,7 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public WeatherResponseDto getCurrentCityWeather(UUID cityId) {
         City city = findCity(cityId);
 
@@ -43,6 +47,7 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public UUID updateCityWeather(UUID cityId, WeatherRequestDto newWeather) {
         return Optional.ofNullable(weatherDao.findByCityAndDate(cityId, newWeather.getDateTime()))
                 .map(existingWeather -> {
@@ -54,6 +59,7 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void deleteCityWeather(UUID cityId) {
         weatherDao.deleteAllByCity(cityId);
     }
