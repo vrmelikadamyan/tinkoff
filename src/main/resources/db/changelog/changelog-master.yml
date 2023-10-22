@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: init_script
+      author: vmelik
+      changes:
+        - sqlFile:
+            path: /sql/init.sql
+            relativeToChangelogFile: true

@@ -2,8 +2,8 @@ package ru.vmelik.tinkoff.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.vmelik.tinkoff.model.City;
-import ru.vmelik.tinkoff.model.Weather;
+import ru.vmelik.tinkoff.model.entity.City;
+import ru.vmelik.tinkoff.model.entity.Weather;
 import ru.vmelik.tinkoff.model.dto.WeatherRequestDto;
 import ru.vmelik.tinkoff.model.dto.WeatherResponseDto;
 

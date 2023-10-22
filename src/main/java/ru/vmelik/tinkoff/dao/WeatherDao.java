@@ -1,7 +1,7 @@
 package ru.vmelik.tinkoff.dao;
 
 import jakarta.annotation.Nullable;
-import ru.vmelik.tinkoff.model.Weather;
+import ru.vmelik.tinkoff.model.entity.Weather;
 
 import java.time.LocalDate;
 import java.util.UUID;

@@ -3,7 +3,7 @@ package ru.vmelik.tinkoff.dao.fake;
 import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Repository;
 import ru.vmelik.tinkoff.dao.WeatherDao;
-import ru.vmelik.tinkoff.model.Weather;
+import ru.vmelik.tinkoff.model.entity.Weather;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +16,7 @@ public class FakeWeatherDaoImpl extends FakeCrudOperations<Weather> implements W
     @Override
     public Weather findByCityAndDate(UUID cityId, LocalDate dateTime) {
         return entityMap.values()
-                .stream().filter(weather -> weather.getCityId().equals(cityId) && weather.getDateTime().equals(dateTime))
+                .stream().filter(weather -> weather.getCity().getId().equals(cityId) && weather.getDateTime().equals(dateTime))
                 .findFirst()
                 .orElse(null);
     }
@@ -24,7 +24,7 @@ public class FakeWeatherDaoImpl extends FakeCrudOperations<Weather> implements W
     @Override
     public void deleteAllByCity(UUID cityId) {
         List<Weather> foundedElements = entityMap.values()
-                .stream().filter(weather -> weather.getCityId().equals(cityId))
+                .stream().filter(weather -> weather.getCity().getId().equals(cityId))
                 .toList();
 
         foundedElements.forEach(weather -> entityMap.remove(weather.getId()));
