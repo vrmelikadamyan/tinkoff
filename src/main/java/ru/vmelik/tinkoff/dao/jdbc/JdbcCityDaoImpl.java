@@ -7,12 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import ru.vmelik.tinkoff.dao.CityDao;
 import ru.vmelik.tinkoff.mapper.CityRowMapper;
 import ru.vmelik.tinkoff.model.entity.City;
 
 import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,6 +21,7 @@ import java.util.UUID;
 public class JdbcCityDaoImpl implements CityDao {
     private static final String INSERT_SQL = "insert into city(name) values (?) ";
     private static final String SELECT_SQL = "select * from city where id = ? ";
+    private static final String SELECT_ALL_SQL = "select * from city";
     private static final String UPDATE_SQL = "update city set name = ? where id = ? ";
     private static final String DELETE_SQL = "delete from city where id = ? ";
 
@@ -28,7 +29,6 @@ public class JdbcCityDaoImpl implements CityDao {
 
     @Nonnull
     @Override
-    @Transactional
     public City create(@Nonnull City entity) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -54,7 +54,6 @@ public class JdbcCityDaoImpl implements CityDao {
     }
 
     @Nonnull
-    @Transactional
     @Override
     public City update(@Nonnull City entity) {
         jdbcTemplate.update(UPDATE_SQL, entity.getName(), entity.getId());
@@ -63,12 +62,16 @@ public class JdbcCityDaoImpl implements CityDao {
     }
 
     @Nullable
-    @Transactional
     @Override
     public City delete(@Nonnull UUID uuid) {
         Optional<City> city = Optional.ofNullable(findById(uuid));
         city.ifPresent(c -> jdbcTemplate.update(DELETE_SQL, c.getId()));
 
         return city.orElse(null);
+    }
+
+    @Override
+    public List<City> findAll() {
+        return jdbcTemplate.query(SELECT_ALL_SQL, new CityRowMapper());
     }
 }

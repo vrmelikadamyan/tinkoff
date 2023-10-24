@@ -7,10 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import ru.vmelik.tinkoff.dao.WeatherDao;
 import ru.vmelik.tinkoff.mapper.WeatherRowMapper;
-import ru.vmelik.tinkoff.model.entity.City;
 import ru.vmelik.tinkoff.model.entity.Weather;
 
 import java.sql.PreparedStatement;
@@ -40,7 +38,6 @@ public class JdbcWeatherDaoImpl implements WeatherDao {
     private final JdbcTemplate jdbcTemplate;
 
     @Nonnull
-    @Transactional
     @Override
     public Weather create(@Nonnull Weather entity) {
         KeyHolder keyHolder = new GeneratedKeyHolder();

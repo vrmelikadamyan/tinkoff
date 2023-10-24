@@ -6,15 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.vmelik.tinkoff.model.Identity;
-import ru.vmelik.tinkoff.model.entity.City;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "weather")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Weather implements Identity<UUID> {
