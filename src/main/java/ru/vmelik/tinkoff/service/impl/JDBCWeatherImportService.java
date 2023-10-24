@@ -1,6 +1,7 @@
 package ru.vmelik.tinkoff.service.impl;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Set;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class JDBCWeatherImportService implements WeatherImportService {
@@ -39,7 +41,7 @@ public class JDBCWeatherImportService implements WeatherImportService {
             connection.commit();
 
         } catch (SQLException ex) {
-
+            log.error("Error to import weather", ex);
         } finally {
             closeConnection(connection);
         }
@@ -57,7 +59,7 @@ public class JDBCWeatherImportService implements WeatherImportService {
             connection.commit();
 
         } catch (SQLException ex) {
-
+            log.error("Error to import weather", ex);
         } finally {
             closeConnection(connection);
         }
@@ -75,7 +77,7 @@ public class JDBCWeatherImportService implements WeatherImportService {
             connection.commit();
 
         } catch (SQLException ex) {
-
+            log.error("Error to import weather", ex);
         } finally {
             closeConnection(connection);
         }
@@ -106,7 +108,7 @@ public class JDBCWeatherImportService implements WeatherImportService {
                 connection.close();
             }
         } catch (SQLException ex) {
-
+            log.error("Error to close db connection", ex);
         }
     }
 }
