@@ -44,13 +44,6 @@ public class ExceptionController {
         return new ErrorResponseDto(exception.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(RuntimeException.class)
-    public ErrorResponseDto error(RuntimeException exception) {
-        log.error("", exception);
-        return new ErrorResponseDto(exception.getMessage());
-    }
-
     private String buildMessage(BindingResult bindingResult) {
         return String.format("Error on %s, rejected errors [%s]",
                 bindingResult.getTarget(),
